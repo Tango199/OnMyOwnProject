@@ -1,0 +1,13 @@
+package OnMyOwnProjectSchoolSelectionProgram;
+
+public class School {
+
+	public School()
+	{
+		
+	}
+	public School(String schoolName, int numStudentsPerSchool)
+	{
+		
+	}
+}

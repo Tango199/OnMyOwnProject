@@ -1,0 +1,39 @@
+package OnMyOwnProjectGui;
+import java.awt.*;
+import java.awt.event.*;
+
+
+import javax.swing.*;
+public class OnMyOwnProjectGui extends JFrame
+{
+	public OnMyOwnProjectGui()
+	{
+		JFrame theFrame = new JFrame();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int widthOfScreen = gd.getDisplayMode().getWidth();
+		int heightOfScreen = gd.getDisplayMode().getHeight();
+		theFrame.setTitle("On My Own Project");
+		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
+		
+		JButton firstProgramButton = new JButton("School Selecting Program");
+		firstProgramButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("Start the first program!");
+			}
+		});
+		theFrame.getContentPane().add(firstProgramButton);
+		theFrame.pack();
+		
+		//theFrame.setLocation(200,200);
+		theFrame.setVisible(true);
+		
+		theFrame.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+	}
+}

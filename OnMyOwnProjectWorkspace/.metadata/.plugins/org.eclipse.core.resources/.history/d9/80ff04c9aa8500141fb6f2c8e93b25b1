@@ -1,0 +1,9 @@
+package OnMyOwnProjectGui;
+import javax.swing.*;
+public class OnMyOwnProjectGui extends JFrame
+{
+	public OnMyOwnProjectGui()
+	{
+		System.out.println("You did this right!");
+	}
+}

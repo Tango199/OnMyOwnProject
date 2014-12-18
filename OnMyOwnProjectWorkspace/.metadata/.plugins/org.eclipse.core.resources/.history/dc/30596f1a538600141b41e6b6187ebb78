@@ -1,0 +1,21 @@
+package OnMyOwnProjectSchoolSelectionProgram;
+
+import java.io.*;
+
+import Core.ProblemInfo;
+
+public class OnMyOwnProjectSchoolSelectionProgram 
+{
+	
+	public OnMyOwnProjectSchoolSelectionProgram()
+	{
+		ProblemInfo.inputPath = ProblemInfo.workingDirectory + "\\data\\input\\";
+		try {
+			FileInputStream file = new FileInputStream(new File(ProblemInfo.inputPath + "Schools.xls"));
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+	}
+}

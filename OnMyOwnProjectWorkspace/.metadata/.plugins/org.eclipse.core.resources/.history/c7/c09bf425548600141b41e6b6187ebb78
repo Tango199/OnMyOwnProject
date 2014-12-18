@@ -1,0 +1,31 @@
+package OnMyOwnProjectSchoolSelectionProgram;
+
+import java.io.*;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import Core.ProblemInfo;
+
+public class OnMyOwnProjectSchoolSelectionProgram 
+{
+	
+	public OnMyOwnProjectSchoolSelectionProgram() throws IOException
+	{
+		ProblemInfo.inputPath = ProblemInfo.workingDirectory + "\\data\\input\\";
+		System.out.println(ProblemInfo.inputPath);
+		try {
+			FileInputStream file = new FileInputStream(new File(ProblemInfo.inputPath + "Schools.xlsx"));
+			HSSFWorkbook schoolWorkbook = new HSSFWorkbook(file);
+			HSSFSheet schoolSheet = schoolWorkbook.getSheetAt(0);
+			Cell cell = null;
+			
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+	}
+}

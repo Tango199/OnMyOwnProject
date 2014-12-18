@@ -1,0 +1,55 @@
+package OnMyOwnProjectGui;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+
+import javax.swing.*;
+
+import OnMyOwnProjectCalculate.CalulateProgram;
+import OnMyOwnProjectSchoolSelectionProgram.OnMyOwnProjectSchoolSelectionProgram;
+public class OnMyOwnProjectGui extends JFrame
+{
+	public OnMyOwnProjectGui()
+	{
+		JFrame theFrame = new JFrame();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int widthOfScreen = gd.getDisplayMode().getWidth();
+		int heightOfScreen = gd.getDisplayMode().getHeight();
+		theFrame.setTitle("On My Own Project");
+		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
+		
+		JButton firstProgramButton = new JButton("School Selecting Program");
+		JButton secondProgramButton = new JButton("Caluclating Program");
+		
+		firstProgramButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				try {
+					OnMyOwnProjectSchoolSelectionProgram firstProgram = new OnMyOwnProjectSchoolSelectionProgram();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		theFrame.getContentPane().add(firstProgramButton);
+		/*secondProgramButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				CalulateProgram secondProgram = new CalulateProgram();
+			}
+		});
+		theFrame.getContentPane().add(secondProgramButton);*/
+		//theFrame.setLocation(200,200);
+		theFrame.pack();
+		theFrame.setVisible(true);
+		
+		theFrame.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+	}
+}
