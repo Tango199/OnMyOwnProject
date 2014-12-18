@@ -66,7 +66,6 @@ public class OnMyOwnProjectSchoolSelectionProgram
 			String firstChoice;
 			String secondChoice;
 			String thirdChoice;
-			List<Student> students = new ArrayList<Student>();
 			for(int i=ProblemInfo.numStudents; i >0; i--)
 			{
 				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
@@ -77,11 +76,9 @@ public class OnMyOwnProjectSchoolSelectionProgram
 				secondChoice = cell.toString();
 				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
 				thirdChoice = cell.toString();
-				
-				students.add(new Student(nameOfStudent,firstChoice,secondChoice,thirdChoice));
 				rowCounter++;
 				colCounter=0;
-				
+				ProblemInfo.print(nameOfStudent);
 			}
 			
 			
