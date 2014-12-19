@@ -1,0 +1,63 @@
+package OnMyOwnProjectSchoolSelectionProgram;
+
+public class Student {
+
+	private String nameOfStudent;
+	private String firstChoice;
+	private String secondChoice;
+	private String thirdChoice;
+	private boolean isAssigned;
+	public Student()
+	{
+		
+	}
+	public Student(String nameOfStudent, String firstChoice, String secondChoice, String thirdChoice)
+	{
+		this.nameOfStudent = nameOfStudent;
+		this.firstChoice = firstChoice;
+		this.secondChoice = secondChoice;
+		this.thirdChoice = thirdChoice;
+		isAssigned = false;
+	}
+	public boolean isAssigned()
+	{
+		return isAssigned;
+	}
+	public void assign()
+	{
+		isAssigned = true;
+	}
+	public String getStudentsName()
+	{
+		return nameOfStudent;
+	}
+	public void setStudentsName(String name)
+	{
+		nameOfStudent = name;
+	}
+	public String getStudentsFirstChoice()
+	{
+		return firstChoice;
+	}
+	public void setStudentsFirstChoice(String choice)
+	{
+		firstChoice = choice;
+	}
+	public String getStudentsSecondChoice()
+	{
+		return secondChoice;
+	}
+	public void setStudentsSecondChoice(String choice)
+	{
+		secondChoice = choice;
+	}
+	public String getStudentsThirdChoice()
+	{
+		return thirdChoice;
+	}
+	public void setStudentsThirdChoice(String choice)
+	{
+		thirdChoice = choice;
+	}
+	
+}

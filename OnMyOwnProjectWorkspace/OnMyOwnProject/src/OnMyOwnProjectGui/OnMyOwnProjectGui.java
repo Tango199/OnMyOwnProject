@@ -24,12 +24,9 @@ public class OnMyOwnProjectGui extends JFrame
 		firstProgramButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				try {
+				
 					OnMyOwnProjectSchoolSelectionProgram firstProgram = new OnMyOwnProjectSchoolSelectionProgram();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
 			}
 		});
 		theFrame.getContentPane().add(firstProgramButton);

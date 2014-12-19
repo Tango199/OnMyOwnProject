@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="Core.ProblemInfo"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFCellStyle"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFColor"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFCellStyle"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFPalette"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.util.HSSFColor"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.CellStyle"/>
+</qualifiedTypeNameHistroy>

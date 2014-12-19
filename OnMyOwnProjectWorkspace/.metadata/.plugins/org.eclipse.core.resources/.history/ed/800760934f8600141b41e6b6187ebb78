@@ -1,9 +1,0 @@
-package OnMyOwnProjectSchoolSelectionProgram;
-
-public class OnMyOwnProjectSchoolSelectionProgram 
-{
-	public OnMyOwnProjectSchoolSelectionProgram()
-	{
-		System.out.println("Im here!");
-	}
-}

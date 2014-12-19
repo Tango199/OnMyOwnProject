@@ -4,6 +4,7 @@ public class School {
 
 	private String schoolName;
 	private int numStudentsPerSchool;
+	private int numStudentsAssigned;
 	
 	public School()
 	{
@@ -13,9 +14,17 @@ public class School {
 	{
 		this.schoolName = schoolName;
 		this.numStudentsPerSchool = numStudentsPerSchool;
+		numStudentsAssigned =0;
 	}
 	
-	
+	public int getNumStudentsAssigned()
+	{
+		return numStudentsAssigned;
+	}
+	public void addOneToNumStudentsAssigned()
+	{
+		numStudentsAssigned++;
+	}
 	public String getSchoolName()
 	{
 		return schoolName;
@@ -32,5 +41,13 @@ public class School {
 	public void setNumStudentsPerSchool(int number)
 	{
 		numStudentsPerSchool = number;
+	}
+	public void minusOneStudentFromSchoolCounter()
+	{
+		numStudentsPerSchool--;
+	}
+	public void addOneStudentFromSchoolCounter()
+	{
+		numStudentsPerSchool++;
 	}
 }

@@ -6,7 +6,8 @@ public class Student {
 	private String firstChoice;
 	private String secondChoice;
 	private String thirdChoice;
-	
+	private boolean isAssigned;
+	private String assignedSchool;
 	public Student()
 	{
 		
@@ -17,29 +18,54 @@ public class Student {
 		this.firstChoice = firstChoice;
 		this.secondChoice = secondChoice;
 		this.thirdChoice = thirdChoice;
+		isAssigned = false;
+		assignedSchool=null;
 	}
-	
-	public String getStudentName()
+	public String getAssignedSchool()
+	{
+		return assignedSchool;
+	}
+	public void setAssignedSchool(String school)
+	{
+		assignedSchool = school;
+	}
+	public boolean isAssigned()
+	{
+		return isAssigned;
+	}
+	public void assign()
+	{
+		isAssigned = true;
+	}
+	public String getStudentsName()
 	{
 		return nameOfStudent;
 	}
-	public void setStudentName(String name)
+	public void setStudentsName(String name)
 	{
 		nameOfStudent = name;
+	}
+	public String getStudentsFirstChoice()
+	{
+		return firstChoice;
+	}
+	public void setStudentsFirstChoice(String choice)
+	{
+		firstChoice = choice;
 	}
 	public String getStudentsSecondChoice()
 	{
 		return secondChoice;
 	}
-	public void setStudentSecondChoice(String choice)
+	public void setStudentsSecondChoice(String choice)
 	{
 		secondChoice = choice;
 	}
-	public String getStudentThirdChoice()
+	public String getStudentsThirdChoice()
 	{
 		return thirdChoice;
 	}
-	public void setStudentThirdChoice(String choice)
+	public void setStudentsThirdChoice(String choice)
 	{
 		thirdChoice = choice;
 	}
