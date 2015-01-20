@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -403,9 +404,33 @@ public class OnMyOwnProjectSchoolSelectionProgram
 		HSSFWorkbook printOutWorkBook = new HSSFWorkbook();
 		HSSFSheet printSheet = printOutWorkBook.createSheet("Short Results Data");
 		
+		  HSSFCellStyle red_style = printOutWorkBook.createCellStyle();
+	        /* We will now specify a background cell color */
+	        red_style.setFillPattern(HSSFCellStyle.FINE_DOTS );
+	        red_style.setFillForegroundColor(new HSSFColor.RED().getIndex());
+	        red_style.setFillBackgroundColor(new HSSFColor.RED().getIndex());
+	        
+		HSSFCellStyle defaultStyle = printOutWorkBook.createCellStyle();
+		defaultStyle.setFillPattern(HSSFCellStyle.FINE_DOTS);
+		  defaultStyle.setFillForegroundColor(new HSSFColor.WHITE().getIndex());
+	        defaultStyle.setFillBackgroundColor(new HSSFColor.WHITE().getIndex());
+	    
+	        HSSFCellStyle green_style = printOutWorkBook.createCellStyle();
+	        /* We will now specify a background cell color */
+	       green_style.setFillPattern(HSSFCellStyle.FINE_DOTS );
+	        green_style.setFillForegroundColor(new HSSFColor.GREEN().getIndex());
+	        green_style.setFillBackgroundColor(new HSSFColor.GREEN().getIndex());
 		
-		
-		
+	        HSSFCellStyle light_green_Style = printOutWorkBook.createCellStyle();
+	        light_green_Style.setFillPattern(HSSFCellStyle.FINE_DOTS);
+	        light_green_Style.setFillForegroundColor(new HSSFColor.LIGHT_GREEN().getIndex());
+	        light_green_Style.setFillBackgroundColor(new HSSFColor.LIGHT_GREEN().getIndex());
+		        
+
+		        HSSFCellStyle orange_Style = printOutWorkBook.createCellStyle();
+		        orange_Style.setFillPattern(HSSFCellStyle.FINE_DOTS);
+		        orange_Style.setFillForegroundColor(new HSSFColor.ORANGE().getIndex());
+		        orange_Style.setFillBackgroundColor(new HSSFColor.ORANGE().getIndex());
 		int rowNum =0;
 		
 		Row row = printSheet.createRow(rowNum);
@@ -456,16 +481,24 @@ public class OnMyOwnProjectSchoolSelectionProgram
 			cell.setCellValue(students.get(i).getStudentsThirdChoice());
 			
 			cell = row.createCell(4);
-			//XSSFCellStyle styleGreen = (XSSFCellStyle)cell.getCellStyle();
-			//XSSFColor green = new XSSFColor(Color.GREEN);
-			//styleGreen.setFillBackgroundColor(green);
-			HSSFPalette greenPallet = printOutWorkBook.getCustomPalette();
-			HSSFColor greenColor = greenPallet.findSimilarColor(0, 255, 0);
-			short palIndex = greenColor.getIndex();
-			HSSFCellStyle style = (HSSFCellStyle) cell.getCellStyle();
-			style.setFillForegroundColor(palIndex);
-			style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			
+			  
 			cell.setCellValue(students.get(i).getAssignedSchool());
+			if(students.get(i).getAssignedSchool().equals(students.get(i).getStudentsFirstChoice()))
+			{
+				  cell.setCellStyle(green_style);	
+			}
+			else if(students.get(i).getAssignedSchool().equals(students.get(i).getStudentsSecondChoice()))
+			{
+				cell.setCellStyle(light_green_Style);
+			}
+			else if(students.get(i).getAssignedSchool().equals(students.get(i).getStudentsThirdChoice()))
+			{
+				cell.setCellStyle(orange_Style);
+			}
+			else	
+			  cell.setCellStyle(red_style);
+			
 			
 			
 		}

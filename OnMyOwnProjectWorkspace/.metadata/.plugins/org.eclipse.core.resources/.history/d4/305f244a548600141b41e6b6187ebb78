@@ -1,9 +1,0 @@
-package Core;
-
-public class ProblemInfo {
-
-	public static String workingDirectory = System.getProperty("user.dir");
-	public static String inputPath;
-	public static String outputPath;
-	
-}

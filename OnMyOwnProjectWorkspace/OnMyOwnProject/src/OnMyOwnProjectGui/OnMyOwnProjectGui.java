@@ -18,9 +18,14 @@ public class OnMyOwnProjectGui extends JFrame
 		theFrame.setTitle("On My Own Project");
 		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
 		
-		JButton firstProgramButton = new JButton("School Selecting Program");
-		JButton secondProgramButton = new JButton("Caluclating Program");
+		JPanel panel1 = new JPanel();
 		
+		JButton firstProgramButton = new JButton("School Selecting Program");
+		panel1.add(firstProgramButton);
+		
+		JButton secondProgramButton = new JButton("Caluclating Program");
+		panel1.add(secondProgramButton);
+		theFrame.getContentPane().add(panel1);
 		firstProgramButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
@@ -29,7 +34,7 @@ public class OnMyOwnProjectGui extends JFrame
 				
 			}
 		});
-		theFrame.getContentPane().add(firstProgramButton);
+		//theFrame.getContentPane().add(firstProgramButton);
 		/*secondProgramButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
