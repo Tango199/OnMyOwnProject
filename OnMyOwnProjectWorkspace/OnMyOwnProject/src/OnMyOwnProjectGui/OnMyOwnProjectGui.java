@@ -23,14 +23,15 @@ public class OnMyOwnProjectGui extends JFrame
 		JButton firstProgramButton = new JButton("School Selecting Program");
 		panel1.add(firstProgramButton);
 		
-		JButton secondProgramButton = new JButton("Caluclating Program");
-		panel1.add(secondProgramButton);
+		//JButton secondProgramButton = new JButton("Caluclating Program");
+		//panel1.add(secondProgramButton);
 		theFrame.getContentPane().add(panel1);
 		firstProgramButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
 				
-					OnMyOwnProjectSchoolSelectionProgram firstProgram = new OnMyOwnProjectSchoolSelectionProgram();
+				FirstProjectAddRemoveScreen firstProgram = new FirstProjectAddRemoveScreen();
+				
 				
 			}
 		});

@@ -1,0 +1,71 @@
+package OnMyOwnProjectGui;
+
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+
+import OnMyOwnProjectSchoolSelectionProgram.OnMyOwnProjectSchoolSelectionProgram;
+
+public class FirstProjectAddRemoveScreen 
+{
+	public FirstProjectAddRemoveScreen()
+	{
+		JFrame theFrame = new JFrame();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int widthOfScreen = gd.getDisplayMode().getWidth();
+		int heightOfScreen = gd.getDisplayMode().getHeight();
+		theFrame.setTitle("First Project Screen");
+		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
+		theFrame.setLocation(550, 400);
+		
+		JPanel panel = new JPanel(new GridLayout(2,2));
+		JRadioButton addRadioButton = new JRadioButton("Add Student");
+		JRadioButton removeRadioButton = new JRadioButton("Remove Student");
+	
+		
+		panel.add(addRadioButton);
+		panel.add(removeRadioButton);
+		
+		
+		
+		JButton firstProgramButton = new JButton("Run School Selecting Program");
+		panel.add(firstProgramButton);
+		theFrame.getContentPane().add(panel);
+		
+		firstProgramButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				OnMyOwnProjectSchoolSelectionProgram firstProgram = new OnMyOwnProjectSchoolSelectionProgram();
+				
+				
+			}
+		});
+		
+		
+		theFrame.pack();
+		theFrame.setVisible(true);
+		
+		theFrame.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+	}
+}
+
+
+
+

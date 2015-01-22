@@ -27,8 +27,6 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	public OnMyOwnProjectSchoolSelectionProgram()
 	{
 		
-		ProblemInfo.inputPath = ProblemInfo.workingDirectory + "\\data\\input\\";
-		ProblemInfo.outputPath = ProblemInfo.workingDirectory + "\\data\\output\\";
 		
 		try {
 			readInSchools();

@@ -1,0 +1,138 @@
+package OnMyOwnProjectGui;
+
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import OnMyOwnProjectSchoolSelectionProgram.OnMyOwnProjectSchoolSelectionProgram;
+
+public class FirstProjectAddRemoveScreen 
+{
+	boolean alreadyDisplay = false;
+	public FirstProjectAddRemoveScreen()
+	{
+		final JFrame theFrame = new JFrame();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int widthOfScreen = gd.getDisplayMode().getWidth();
+		int heightOfScreen = gd.getDisplayMode().getHeight();
+		theFrame.setTitle("First Project Screen");
+		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
+		theFrame.setLocation(550, 400);
+		
+		final JPanel panel = new JPanel(new GridLayout(7,2));
+		
+		JRadioButton addRadioButton = new JRadioButton("Add Student");
+	
+		JRadioButton removeRadioButton = new JRadioButton("Remove Student");
+		ButtonGroup groupButton = new ButtonGroup();
+		groupButton.add(addRadioButton);
+		groupButton.add(removeRadioButton);
+		final JButton firstProgramButton = new JButton("Run School Selecting Program");
+		panel.add(addRadioButton);
+		panel.add(removeRadioButton);
+		final JLabel studentNameLabel = new JLabel("Student Name");
+		final JTextField studentNameField = new JTextField(25);
+		final JLabel studentFirstPlacementLabel = new JLabel("First Choice");
+		final JTextField firstPlacementField = new JTextField(50);
+		final JLabel studentSecondPlacementLabel = new JLabel("Second Choice");
+		final JTextField secondPlacementField = new JTextField(50);
+		final JLabel studentThirdPlacementLabel = new JLabel("Third Choice");
+		final JTextField thirdPlacementField = new JTextField(50);
+		final JButton addStudent = new JButton("Add Student");
+		final JLabel space1 = new JLabel("");
+		addRadioButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				panel.add(studentNameLabel);
+				panel.add(studentNameField);
+				panel.add(studentFirstPlacementLabel);
+				panel.add(firstPlacementField);
+				panel.add(studentSecondPlacementLabel);
+				panel.add(secondPlacementField);
+				panel.add(studentThirdPlacementLabel);
+				panel.add(thirdPlacementField);
+				panel.add(space1);
+				panel.add(addStudent);
+				
+				addStudent.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e)
+					{
+						
+						System.out.println("Adding Student");
+						
+						
+					}
+				});
+				
+				panel.add(firstProgramButton);
+				theFrame.getContentPane().add(panel);
+				theFrame.pack();
+				theFrame.setVisible(true);
+				alreadyDisplay = true;
+			}
+		});
+		removeRadioButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				if(alreadyDisplay)
+				{
+					panel.remove(studentNameLabel);
+					panel.remove(studentNameField);
+					panel.remove(studentFirstPlacementLabel);
+					panel.remove(firstPlacementField);
+					panel.remove(studentSecondPlacementLabel);
+					panel.remove(secondPlacementField);
+					panel.remove(studentThirdPlacementLabel);
+					panel.remove(thirdPlacementField);
+					panel.remove(space1);
+					panel.remove(addStudent);
+				}
+			}
+		});
+		
+	
+		
+		theFrame.getContentPane().add(panel);
+		theFrame.pack();
+		theFrame.setVisible(true);
+		
+		firstProgramButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				OnMyOwnProjectSchoolSelectionProgram firstProgram = new OnMyOwnProjectSchoolSelectionProgram();
+				
+				
+			}
+		});
+		
+		
+		theFrame.pack();
+		theFrame.setVisible(true);
+		
+		theFrame.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+	}
+}
+
+
+
+

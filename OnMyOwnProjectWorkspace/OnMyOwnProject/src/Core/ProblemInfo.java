@@ -3,8 +3,8 @@ package Core;
 public class ProblemInfo {
 
 	public static String workingDirectory = System.getProperty("user.dir");
-	public static String inputPath;
-	public static String outputPath;
+	public static String inputPath = workingDirectory + "\\data\\input\\";
+	public static String outputPath = workingDirectory + "\\data\\output\\";
 	public static int numSchools;
 	public static int numStudents;
 	
