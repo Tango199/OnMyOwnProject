@@ -35,11 +35,31 @@ public class OnMyOwnProjectSchoolSelectionProgram
 			e.printStackTrace();
 		}
 		
+		boolean possible = checkIfPossible();
 		//writeInputOut();
-		assignStudents();
-		assignStuckKids();
-		printShortResults();
-		printLongResults();
+		if(possible)
+		{
+			assignStudents();
+			assignStuckKids();
+			printShortResults();
+			printLongResults();
+		}
+		else
+		{
+			System.out.println("Need more placements!");
+		}
+		
+		
+	}
+	public boolean checkIfPossible()
+	{
+		if(ProblemInfo.numStudents > ProblemInfo.totalNumPlacements)
+		{
+			System.out.println("Huston we have a problem");
+			return false;
+		}
+		else
+		return true;
 		
 	}
 	public void assignStudents()
@@ -238,6 +258,7 @@ public class OnMyOwnProjectSchoolSelectionProgram
 				numStudentsPerSchool = Integer.parseInt(tempString);
 				rowCountSchools++;
 				colCounter=0;
+				ProblemInfo.totalNumPlacements+=numStudentsPerSchool;
 				schools.add(new School(schoolName,numStudentsPerSchool));
 				
 				

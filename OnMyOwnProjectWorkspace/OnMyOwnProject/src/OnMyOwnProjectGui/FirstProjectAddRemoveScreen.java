@@ -291,8 +291,8 @@ public class FirstProjectAddRemoveScreen
 				Row rowToRemove = sheet.getRow(rowNumIn);
 				sheet.removeRow(rowToRemove);
 				
-				//shift isnt working..... screwing alot up try adding one to sheet.getLastRowNum()..... doesnt want to shift row up 
-				sheet.shiftRows(rowNumIn, sheet.getLastRowNum(), -1);
+				//shift still isnt working correctly.... especially if it is the last row
+				sheet.shiftRows(rowNumIn+1, sheet.getLastRowNum(), -1);
 				
 			
 				
