@@ -55,7 +55,7 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	{
 		if(ProblemInfo.numStudents > ProblemInfo.totalNumPlacements)
 		{
-			System.out.println("Huston we have a problem");
+			System.out.println("We have a problem");
 			return false;
 		}
 		else
