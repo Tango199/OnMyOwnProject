@@ -13,6 +13,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -117,7 +120,13 @@ public class FirstProjectAddRemoveScreen
 						String secondChoice = secondPlacementField.getText();
 						String thirdChoice = thirdPlacementField.getText();
 						
+						studentName = replaceSpace(studentName);
+						firstChoice = replaceSpace(firstChoice);
+						secondChoice = replaceSpace(secondChoice);
+						thirdChoice = replaceSpace(thirdChoice);
+						
 						addStudentToFile(studentName,firstChoice,secondChoice,thirdChoice);
+						addStudentToDatabase(studentName,firstChoice,secondChoice,thirdChoice);
 						System.out.println("Added Student");
 						studentNameField.setText("");
 						firstPlacementField.setText("");
@@ -327,6 +336,55 @@ public class FirstProjectAddRemoveScreen
 		
 		
 		return true;
+	}
+	public String replaceSpace(String stringToReplace)
+	{
+		String replacedString = stringToReplace.replace(" ", "_");
+		return replacedString;
+	}
+	public void addStudentToDatabase(String name, String firstChoice, String secondChoice,String thirdChoice)
+	{
+		Connection addStudentConnection = null;
+		try 
+		{
+			addStudentConnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+
+		if (addStudentConnection != null) 
+		{
+			
+			java.sql.Statement stmt = null;
+			try {
+				stmt = addStudentConnection.createStatement();
+				String sqlAdd = "INSERT INTO STUDENTS"+
+						" VALUES("+name+","+firstChoice+","+secondChoice+","+thirdChoice+")";
+				System.out.println(sqlAdd);
+				stmt.executeUpdate(sqlAdd);
+				System.out.println("Added "+name+" to the student table");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if(addStudentConnection != null)
+		{
+			try {
+				addStudentConnection.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}		
 	}
 }
 

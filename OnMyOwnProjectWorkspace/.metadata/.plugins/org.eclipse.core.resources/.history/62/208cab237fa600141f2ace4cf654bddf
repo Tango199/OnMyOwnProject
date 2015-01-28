@@ -1,0 +1,191 @@
+package OnMyOwnProjectMain;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
+import OnMyOwnProjectGui.OnMyOwnProjectGui;
+
+public class OnMyOwnProjectMain {
+
+	Connection createDBconnection = null;
+	public static void main(String[] args) 
+	{
+		//start gui here
+		//OnMyOwnProjectGui GUI = new OnMyOwnProjectGui();
+
+		boolean dbExistsFlag = checkIfDBExists();
+		 
+				
+	 
+		try 
+		{
+			createDBconnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+	 
+		if (createDBconnection != null) 
+		{
+			System.out.println("You made it, take control your database now!");
+			java.sql.Statement stmt = null;
+			boolean databaseThereFlag = false;
+			ResultSet resultSet = null;
+			try {
+				resultSet = createDBconnection.getMetaData().getCatalogs();
+				while(resultSet.next())
+				{
+					String databaseName = resultSet.getString(1);
+					if(databaseName.equals("placestudentseducation"))
+					{
+						databaseThereFlag = true;
+						break; //check to see if the tables exist here also? 
+					}
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			finally
+			{
+				 try {
+					resultSet.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+				
+		
+			try 
+			{
+				if(!databaseThereFlag)
+				{
+					stmt = createDBconnection.createStatement();
+					String sqlCreateDatabase = "CREATE DATABASE placeStudentsEducation";
+					/*String sqlCreateTable = "CREATE TABLE STUDENTS "+
+											"(name VARCHAR(52) not NULL, "+
+											" firstChoice VARCHAR(255), "+
+											" secondChoice VARCHAR(255), "+
+											" thirdChoice VARCHAR(255), "+
+											" PRIMARY KEY ( name ))";*/
+					stmt.executeUpdate(sqlCreateDatabase);
+					System.out.println("Created database...");
+					//stmt.executeUpdate(sqlCreateTable);
+					//System.out.println("Created table in database");
+				}
+				else
+				{
+					//database already exists
+				}
+				
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			
+		}
+		else 	
+		{
+			
+			System.out.println("Failed to make connection!");
+		}
+	  
+		
+		if(createDBconnection != null)
+		{
+			try {
+				createDBconnection.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+		
+/*		Connection createTableConnection = null;
+		try 
+		{
+			createTableConnection = DriverManager
+			//.getConnection("jdbc:mysql://localhost:3306/","root", "test!"); //root! at sru test! at home
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+	 
+		if (createTableConnection != null) 
+		{
+			System.out.println("You made it, take control your database now!");
+			java.sql.Statement stmt = null;
+			try 
+			{
+				stmt = createTableConnection.createStatement();
+				String sqlCreateStudentTable = "CREATE TABLE STUDENTS "+
+										"(name VARCHAR(52) not NULL, "+
+										" firstChoice VARCHAR(255), "+
+										" secondChoice VARCHAR(255), "+
+										" thirdChoice VARCHAR(255), "+
+										" PRIMARY KEY ( name ))";
+				stmt.executeUpdate(sqlCreateStudentTable);
+				String sqlCreateSchoolTable = "CREATE TABLE SCHOOLS "+
+											"(schoolName VARCHAR(52) not NULL, "+
+											" numStudentsRecieving INTEGER not null, "+
+											" PRIMARY KEY ( schoolName ))";
+				stmt.executeUpdate(sqlCreateSchoolTable);
+				System.out.println("Created Schools table in database");
+				
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			
+		}
+		else 	
+		{
+			
+			System.out.println("Failed to make connection!");
+		}
+	  
+		
+		if(createTableConnection != null)
+		{
+			try {
+				createTableConnection.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+*/		
+		
+		
+		
+		
+		System.gc();
+
+	}
+	public static boolean checkIfDBExists()
+	{
+		
+		return true;
+	}
+}

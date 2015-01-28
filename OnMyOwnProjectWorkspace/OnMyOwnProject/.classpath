@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="I:/gitRepo/OnMyOwnProject/OnMyOwnProjectWorkspace/OnMyOwnProject/JAR/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="I:/gitRepo/OnMyOwnProject/OnMyOwnProjectWorkspace/OnMyOwnProject/JAR/mysql-connector-java-5.1.24.jar"/>
 	<classpathentry kind="lib" path="I:/gitRepo/OnMyOwnProject/OnMyOwnProjectWorkspace/OnMyOwnProject/JAR/poi-3.10-FINAL-20140208.jar"/>
 	<classpathentry kind="lib" path="I:/gitRepo/OnMyOwnProject/OnMyOwnProjectWorkspace/OnMyOwnProject/JAR/poi-ooxml-3.10-FINAL-20140208.jar"/>
 	<classpathentry kind="lib" path="I:/gitRepo/OnMyOwnProject/OnMyOwnProjectWorkspace/OnMyOwnProject/JAR/poi-ooxml-schemas-3.10-FINAL-20140208.jar"/>
