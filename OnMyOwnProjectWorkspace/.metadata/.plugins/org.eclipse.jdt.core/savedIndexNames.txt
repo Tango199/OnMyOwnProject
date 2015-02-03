@@ -1,23 +1,16 @@
-INDEX VERSION 1.127+I:\gitRepo\OnMyOwnProject\OnMyOwnProjectWorkspace\.metadata\.plugins\org.eclipse.jdt.core
-3065916431.index
-1697886153.index
+INDEX VERSION 1.127+F:\gitRepo\OnMyOwnProject\OnMyOwnProjectWorkspace\.metadata\.plugins\org.eclipse.jdt.core
 3133528496.index
-3974580528.index
-1299022128.index
-823172761.index
-1995173708.index
 305854171.index
-1908143014.index
-4249799822.index
-1043954154.index
-30765161.index
-4108727661.index
-1115467115.index
 163172794.index
-2011591171.index
-1498219845.index
-2042624324.index
-2538895108.index
-4155206848.index
+1995173708.index
 4041092966.index
-3021786408.index
+4155206848.index
+1498219845.index
+1697886153.index
+4108727661.index
+1299022128.index
+30765161.index
+1115467115.index
+2538895108.index
+3065916431.index
+3974580528.index
