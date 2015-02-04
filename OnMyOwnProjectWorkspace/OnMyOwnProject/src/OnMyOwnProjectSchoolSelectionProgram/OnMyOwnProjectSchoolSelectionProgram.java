@@ -2,6 +2,10 @@ package OnMyOwnProjectSchoolSelectionProgram;
 
 import java.awt.Color;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -28,12 +32,12 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	{
 		
 		
-		try {
-			readInSchools();
-			readInStudents();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+			readInSchoolsFromDatabase();
+			readInStudentsDatabase();
+			//readInSchoolsExcel();
+			//readInStudentsExcel();
+		
 		
 		boolean possible = checkIfPossible();
 		//writeInputOut();
@@ -192,7 +196,131 @@ public class OnMyOwnProjectSchoolSelectionProgram
 			stuckStudents.remove(randomStuckStudent);
 		}
 	}
-	public void readInStudents() throws IOException
+	public void readInStudentsDatabase()
+	{
+		Connection readStudentsTableConnection = null;
+		try 
+		{
+			readStudentsTableConnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+
+		if (readStudentsTableConnection != null) 
+		{
+			String sqlGetStudents = "SELECT * FROM STUDENTS";
+			String sqlNumStudents = "SELECT COUNT(*) FROM STUDENTS";
+			try
+			{
+				java.sql.PreparedStatement getNumStudents = readStudentsTableConnection.prepareStatement(sqlNumStudents);
+				ResultSet numStudentsSet = getNumStudents.executeQuery();
+				while(numStudentsSet.next())
+				{
+					ProblemInfo.numStudents = numStudentsSet.getInt(1);
+				}
+				java.sql.PreparedStatement getStudents = readStudentsTableConnection.prepareStatement(sqlGetStudents);
+				ResultSet studentsSet = getStudents.executeQuery();
+				while(studentsSet.next())
+				{
+					String nameOfStudent = studentsSet.getString("name");
+					String firstChoice = studentsSet.getString("firstChoice");
+					String secondChoice = studentsSet.getString("secondChoice");
+					String thirdChoice = studentsSet.getString("thridChoice");
+					students.add(new Student(nameOfStudent,firstChoice,secondChoice,thirdChoice));
+				}
+				studentsSet.close();
+				numStudentsSet.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					readStudentsTableConnection.close();
+				}
+				catch (SQLException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void readInSchoolsFromDatabase()
+	{
+		//TODO this needs tested.... should work but not assuming anything... need a way to insert schools before this can be tested
+
+		Connection readSchoolsTableConnection = null;
+		try 
+		{
+			readSchoolsTableConnection= DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+
+		if (readSchoolsTableConnection != null) 
+		{
+			String sqlGetSchools = "SELECT * FROM SCHOOLS";
+			String sqlNumSchools = "SELECT COUNT(*) FROM SCHOOLS";
+			int numOverallPlacements=0;
+			try
+			{
+				java.sql.PreparedStatement getNumSchools = readSchoolsTableConnection.prepareStatement(sqlNumSchools);
+				ResultSet numSchoolsSet = getNumSchools.executeQuery();
+				while(numSchoolsSet.next())
+				{
+					ProblemInfo.numSchools = numSchoolsSet.getInt(1);
+				}
+				java.sql.PreparedStatement getSchools = readSchoolsTableConnection.prepareStatement(sqlGetSchools);
+				ResultSet schoolsSet = getSchools.executeQuery();
+				while(schoolsSet.next())
+				{
+					String nameOfSchool = schoolsSet.getString("schoolName");
+					int numStudentsAccepting= schoolsSet.getInt("numStudentsRecieving");
+					numOverallPlacements += numStudentsAccepting;
+					schools.add(new School(nameOfSchool,numStudentsAccepting));
+				}
+				ProblemInfo.totalNumPlacements=numOverallPlacements;
+				schoolsSet.close();
+				numSchoolsSet.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					readSchoolsTableConnection.close();
+				}
+				catch (SQLException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
+	public void readInStudentsExcel() throws IOException
 	{
 		try
 		{
@@ -232,7 +360,7 @@ public class OnMyOwnProjectSchoolSelectionProgram
 		}
 		
 	}
-	public void readInSchools() throws IOException
+	public void readInSchoolsExcel() throws IOException
 	{
 		try {
 			FileInputStream fileSchool = new FileInputStream(new File(ProblemInfo.inputPath + "Schools.xls"));

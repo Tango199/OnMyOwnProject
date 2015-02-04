@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
@@ -28,6 +29,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import Core.ProblemInfo;
 import OnMyOwnProjectSchoolSelectionProgram.OnMyOwnProjectSchoolSelectionProgram;
@@ -180,8 +183,19 @@ public class FirstProjectAddRemoveScreen
 					public void actionPerformed(ActionEvent e)
 					{
 						String studentName = studentNameFieldToRemove.getText();
-						boolean removedFlag = removeStudentFromFile(studentName);
-						System.out.println("Removing Student");
+						studentName=replaceSpace(studentName);
+						//boolean removedFlag = removeStudentFromFile(studentName); TODO removeFromFile isnt working
+						boolean removeFromDB = removeStudentFromDB(studentName);
+						if(removeFromDB)
+						{
+							System.out.println("Student Removed from database");
+						}
+						else
+						{
+							System.out.println("Student did not exist in the database");
+						}
+
+						studentNameFieldToRemove.setText("");
 					}
 				});
 				theFrame.pack();
@@ -268,6 +282,62 @@ public class FirstProjectAddRemoveScreen
 			//create file, because it does not exist in the file location 
 		}
 
+	}
+	public boolean removeStudentFromDB(String name)
+	{
+		Connection removeStudentConnection = null;
+		boolean removeFlag=false;
+		try 
+		{
+			removeStudentConnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			
+		}
+
+		if (removeStudentConnection != null) 
+		{
+			
+			
+			try {
+				
+	
+				String sqlRemove = " DELETE FROM STUDENTS WHERE name =?";
+				
+				//prepared statements used to prevent sql injection
+				java.sql.PreparedStatement preparedRemoveStatement = removeStudentConnection.prepareStatement(sqlRemove);
+				preparedRemoveStatement.setString(1,name);
+				int testIfDeleted = preparedRemoveStatement.executeUpdate();
+				if(testIfDeleted== 1)
+				{
+					removeFlag = true;
+				}
+				else
+				{
+					removeFlag = false;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if(removeStudentConnection != null)
+		{
+			try {
+				removeStudentConnection.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}		
+		return removeFlag;
 	}
 	public boolean removeStudentFromFile(String name)
 	{
