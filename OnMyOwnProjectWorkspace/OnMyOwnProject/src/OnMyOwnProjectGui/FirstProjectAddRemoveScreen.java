@@ -1,6 +1,5 @@
 package OnMyOwnProjectGui;
 
-import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
@@ -361,13 +360,19 @@ public class FirstProjectAddRemoveScreen
 		if (addStudentConnection != null) 
 		{
 			
-			java.sql.Statement stmt = null;
+			
 			try {
-				stmt = addStudentConnection.createStatement();
-				String sqlAdd = "INSERT INTO STUDENTS"+
-						" VALUES("+name+","+firstChoice+","+secondChoice+","+thirdChoice+")";
-				System.out.println(sqlAdd);
-				stmt.executeUpdate(sqlAdd);
+				
+				String sqlAdd = " INSERT INTO STUDENTS(name,firstChoice,secondChoice,thirdChoice)"
+						+ "VALUES(?,?,?,?)";
+				
+				//prepared statements used to prevent sql injection
+				java.sql.PreparedStatement preparedAddStatement = addStudentConnection.prepareStatement(sqlAdd);
+				preparedAddStatement.setString(1,name);
+				preparedAddStatement.setString(2, firstChoice);
+				preparedAddStatement.setString(3,secondChoice);
+				preparedAddStatement.setString(4,thirdChoice);
+				preparedAddStatement.execute();
 				System.out.println("Added "+name+" to the student table");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
