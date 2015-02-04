@@ -38,4 +38,5 @@
 <fullyQualifiedTypeName name="com.mysql.jdbc.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="OnMyOwnProjectGui.FirstProjectAddRemoveScreen"/>
 </qualifiedTypeNameHistroy>

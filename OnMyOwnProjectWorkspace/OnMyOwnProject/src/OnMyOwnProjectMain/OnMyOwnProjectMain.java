@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
 
+import OnMyOwnProjectGui.FirstProjectAddRemoveScreen;
 import OnMyOwnProjectGui.OnMyOwnProjectGui;
 
 public class OnMyOwnProjectMain {
@@ -17,10 +18,10 @@ public class OnMyOwnProjectMain {
 	{
 		//start gui here
 		
-		checkIfDBExists();
-		checkIfTableExists("Students");
-		checkIfTableExists("Schools");
-		OnMyOwnProjectGui GUI = new OnMyOwnProjectGui();
+		//checkIfDBExists();
+		//checkIfTableExists("Students");
+		//checkIfTableExists("Schools");
+		FirstProjectAddRemoveScreen GUI = new FirstProjectAddRemoveScreen();
 
 
 

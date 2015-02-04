@@ -37,8 +37,11 @@ import OnMyOwnProjectSchoolSelectionProgram.OnMyOwnProjectSchoolSelectionProgram
 
 public class FirstProjectAddRemoveScreen 
 {
-	boolean alreadyDisplayAdd = false;
-	boolean alreadyDisplayRemove = false;
+	boolean alreadyDisplayAddStudent = false;
+	boolean alreadyDisplayRemoveStudent = false;
+	boolean alreadyDisplayAddSchool = false;
+	boolean alreadyDisplayRemoveSchool = false;
+	
 	public FirstProjectAddRemoveScreen()
 	{
 		final JFrame theFrame = new JFrame();
@@ -51,16 +54,23 @@ public class FirstProjectAddRemoveScreen
 		
 		final JPanel panel = new JPanel(new GridLayout(7,2));
 		
-		JRadioButton addRadioButton = new JRadioButton("Add Student");
-	
-		JRadioButton removeRadioButton = new JRadioButton("Remove Student");
+		//TODO fix the formatting of the gui,  the two new radio buttons messed with the formatting
+		JRadioButton addStudentRadioButton = new JRadioButton("Add Student");
+		JRadioButton removeStudentRadioButton = new JRadioButton("Remove Student");
+		JRadioButton addSchoolRadioButton = new JRadioButton("Add School");
+		JRadioButton removeSchoolRadioButton = new JRadioButton("Remove School");
+		
 		ButtonGroup groupButton = new ButtonGroup();
-		groupButton.add(addRadioButton);
-		groupButton.add(removeRadioButton);
+		groupButton.add(addStudentRadioButton);
+		groupButton.add(removeStudentRadioButton);
+		groupButton.add(addSchoolRadioButton);
+		groupButton.add(removeSchoolRadioButton);
 		final JButton firstProgramButton = new JButton("Run School Selecting Program");
-		panel.add(addRadioButton);
-		panel.add(removeRadioButton);
-		//add stuff
+		panel.add(addStudentRadioButton);
+		panel.add(addSchoolRadioButton);
+		panel.add(removeStudentRadioButton);
+		panel.add(removeSchoolRadioButton);
+		//add student stuff
 		final JLabel studentNameLabel = new JLabel("Student Name");
 		final JTextField studentNameField = new JTextField(25);
 		final JLabel studentFirstPlacementLabel = new JLabel("First Choice");
@@ -72,7 +82,7 @@ public class FirstProjectAddRemoveScreen
 		final JButton addStudent = new JButton("Add Student");
 		final JLabel space1 = new JLabel("");
 		
-		//remove stuff
+		//remove student stuff
 		final JLabel studentNameLabelRemove = new JLabel("Student Name to remove");
 		final JTextField studentNameFieldToRemove = new JTextField(25);
 		//studentNameFieldToRemove.setBackground(Color.BLUE);
@@ -83,11 +93,24 @@ public class FirstProjectAddRemoveScreen
 		final JLabel space5 = new JLabel("");
 		final JLabel space6 = new JLabel("");
 		final JLabel space7 = new JLabel("");
+		final JLabel space8 = new JLabel("");
 		
-		addRadioButton.addActionListener(new ActionListener(){
+		//add school stuff
+		final JLabel schoolToAddLabel = new JLabel("School to Add");
+		final JTextField schoolNameFieldToAdd = new JTextField(45);
+		final JLabel numberOfPlacementsLabel = new JLabel("Number of placements offered");
+		final JTextField numberOfPlacementsField = new JTextField(5);
+		final JButton addSchool = new JButton("Add School");
+		
+		//remove school stuff
+		final JLabel schoolToRemoveLabel = new JLabel("School to Remove");
+		final JTextField schoolNameFieldToRemove = new JTextField(45);
+		final JButton removeSchoolButton = new JButton("Remove School");
+		
+		addSchoolRadioButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				if(alreadyDisplayRemove)
+				if(alreadyDisplayRemoveStudent)
 				{
 					panel.remove(studentNameLabelRemove);
 					panel.remove(studentNameFieldToRemove);
@@ -101,7 +124,226 @@ public class FirstProjectAddRemoveScreen
 					panel.remove(firstProgramButton);
 					panel.revalidate();
 					panel.repaint();
-					alreadyDisplayRemove = false;
+					alreadyDisplayRemoveStudent = false;
+				}
+				else if(alreadyDisplayAddStudent)
+				{
+					panel.remove(studentNameLabel);
+					panel.remove(studentNameField);
+					panel.remove(studentFirstPlacementLabel);
+					panel.remove(firstPlacementField);
+					panel.remove(studentSecondPlacementLabel);
+					panel.remove(secondPlacementField);
+					panel.remove(studentThirdPlacementLabel);
+					panel.remove(thirdPlacementField);
+					panel.remove(space1);
+					panel.remove(addStudent);
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddStudent = false;
+				}
+				else if(alreadyDisplayRemoveSchool)
+				{
+					panel.remove(schoolToRemoveLabel);
+					panel.remove(schoolNameFieldToRemove);
+					panel.remove(removeSchoolButton);
+					panel.remove(space7);
+					panel.remove(space8);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayRemoveSchool=false;
+				}
+				
+				//set the add school stuff
+				panel.add(schoolToAddLabel);
+				panel.add(schoolNameFieldToAdd);
+				panel.add(numberOfPlacementsLabel);
+				panel.add(numberOfPlacementsField);
+				panel.add(addSchool);
+				addSchool.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e)
+					{
+						String schoolToAdd = schoolNameFieldToAdd.getText();
+						schoolToAdd = replaceSpace(schoolToAdd);
+						int numSchoolPlacements = Integer.parseInt(numberOfPlacementsField.getText());
+						boolean addSchoolFlag=addSchoolToDatabase(schoolToAdd,numSchoolPlacements);
+						if(addSchoolFlag)
+						{
+							System.out.println("School added");
+							
+						}
+						else
+						{
+							System.out.println("Could not add school");
+						}
+					}
+				});
+				panel.add(space2);
+				panel.add(space3);
+				panel.add(space4);
+				panel.add(space5);
+				panel.add(space6);
+				
+				panel.add(firstProgramButton);
+				theFrame.getContentPane().add(panel);
+				theFrame.pack();
+				theFrame.setVisible(true);
+				alreadyDisplayAddSchool = true;
+			}
+		});
+		removeSchoolRadioButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				if(alreadyDisplayRemoveStudent)
+				{
+					panel.remove(studentNameLabelRemove);
+					panel.remove(studentNameFieldToRemove);
+					panel.remove(space1);
+					panel.remove(removeStudent);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayRemoveStudent = false;
+				}
+				else if(alreadyDisplayAddStudent)
+				{
+					panel.remove(studentNameLabel);
+					panel.remove(studentNameField);
+					panel.remove(studentFirstPlacementLabel);
+					panel.remove(firstPlacementField);
+					panel.remove(studentSecondPlacementLabel);
+					panel.remove(secondPlacementField);
+					panel.remove(studentThirdPlacementLabel);
+					panel.remove(thirdPlacementField);
+					panel.remove(space1);
+					panel.remove(addStudent);
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddStudent = false;
+				}
+				else if(alreadyDisplayAddSchool)
+				{
+					panel.remove(schoolToAddLabel);
+					panel.remove(schoolNameFieldToAdd);
+					panel.remove(numberOfPlacementsLabel);
+					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchool);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddSchool=false;
+				}
+				
+				
+				panel.add(schoolToRemoveLabel);
+				panel.add(schoolNameFieldToRemove);
+				panel.add(removeSchoolButton);
+				removeSchoolButton.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e)
+					{
+						String schoolToRemove = schoolNameFieldToRemove.getText();
+						schoolToRemove = replaceSpace(schoolToRemove);
+						boolean addSchoolFlag=removeSchoolFromDatabase(schoolToRemove);
+						if(addSchoolFlag)
+						{
+							System.out.println("School removed");
+							
+						}
+						else
+						{
+							System.out.println("Could not remove school");
+						}
+					}
+				});
+				panel.add(space7);
+				panel.add(space8);
+				panel.add(space2);
+				panel.add(space3);
+				panel.add(space4);
+				panel.add(space5);
+				panel.add(space6);
+				
+				panel.add(firstProgramButton);
+				theFrame.getContentPane().add(panel);
+				theFrame.pack();
+				theFrame.setVisible(true);
+				alreadyDisplayRemoveSchool = true;
+			}
+		});
+		addStudentRadioButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				if(alreadyDisplayRemoveStudent)
+				{
+					panel.remove(studentNameLabelRemove);
+					panel.remove(studentNameFieldToRemove);
+					panel.remove(space1);
+					panel.remove(removeStudent);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayRemoveStudent = false;
+				}
+				else if(alreadyDisplayRemoveSchool)
+				{
+					panel.remove(schoolToRemoveLabel);
+					panel.remove(schoolNameFieldToRemove);
+					panel.remove(removeSchoolButton);
+					panel.remove(space7);
+					panel.remove(space8);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayRemoveSchool=false;
+				}
+				else if(alreadyDisplayAddSchool)
+				{
+					panel.remove(schoolToAddLabel);
+					panel.remove(schoolNameFieldToAdd);
+					panel.remove(numberOfPlacementsLabel);
+					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchool);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddSchool=false;
 				}
 				panel.add(studentNameLabel);
 				panel.add(studentNameField);
@@ -142,14 +384,14 @@ public class FirstProjectAddRemoveScreen
 				theFrame.getContentPane().add(panel);
 				theFrame.pack();
 				theFrame.setVisible(true);
-				alreadyDisplayAdd = true;
+				alreadyDisplayAddStudent = true;
 				
 			}
 		});
-		removeRadioButton.addActionListener(new ActionListener(){
+		removeStudentRadioButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				if(alreadyDisplayAdd)
+				if(alreadyDisplayAddStudent)
 				{
 					panel.remove(studentNameLabel);
 					panel.remove(studentNameField);
@@ -162,8 +404,46 @@ public class FirstProjectAddRemoveScreen
 					panel.remove(space1);
 					panel.remove(addStudent);
 					panel.remove(firstProgramButton);
-					alreadyDisplayAdd = false;
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddStudent = false;
 					
+				}
+				else if(alreadyDisplayAddSchool)
+				{
+					panel.remove(schoolToAddLabel);
+					panel.remove(schoolNameFieldToAdd);
+					panel.remove(numberOfPlacementsLabel);
+					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchool);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayAddSchool=false;
+				}
+				else if(alreadyDisplayRemoveSchool)
+				{
+					panel.remove(schoolToRemoveLabel);
+					panel.remove(schoolNameFieldToRemove);
+					panel.remove(removeSchoolButton);
+					panel.remove(space7);
+					panel.remove(space8);
+					panel.remove(space2);
+					panel.remove(space3);
+					panel.remove(space4);
+					panel.remove(space5);
+					panel.remove(space6);
+					
+					panel.remove(firstProgramButton);
+					panel.revalidate();
+					panel.repaint();
+					alreadyDisplayRemoveSchool=false;
 				}
 				panel.add(studentNameLabelRemove);
 				panel.add(studentNameFieldToRemove);
@@ -177,7 +457,7 @@ public class FirstProjectAddRemoveScreen
 				panel.add(firstProgramButton);
 				panel.revalidate();
 				panel.repaint();
-				alreadyDisplayRemove = true;
+				alreadyDisplayRemoveStudent = true;
 				
 				removeStudent.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e)
@@ -413,6 +693,7 @@ public class FirstProjectAddRemoveScreen
 	}
 	public void addStudentToDatabase(String name, String firstChoice, String secondChoice,String thirdChoice)
 	{
+		//TODO return if it is successful or not
 		Connection addStudentConnection = null;
 		try 
 		{
@@ -460,6 +741,119 @@ public class FirstProjectAddRemoveScreen
 				e.printStackTrace();
 			}
 		}		
+	}
+	public boolean addSchoolToDatabase(String schoolName, int numStudents)
+	{
+		Connection addSchoolConnection = null;
+		boolean addSchoolFlag = false;
+		try 
+		{
+			addSchoolConnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			
+		}
+
+		if (addSchoolConnection != null) 
+		{
+			
+			try {
+				
+				String sqlAddSchool = " INSERT INTO SCHOOLS(schoolName,numStudentsRecieving)"
+						+ "VALUES(?,?)";
+				
+				//prepared statements used to prevent sql injection
+				java.sql.PreparedStatement preparedAddSchoolStatement = addSchoolConnection.prepareStatement(sqlAddSchool);
+				preparedAddSchoolStatement .setString(1,schoolName);
+				preparedAddSchoolStatement .setInt(2, numStudents);
+				int testIfAdded = preparedAddSchoolStatement.executeUpdate();
+				if(testIfAdded== 1)
+				{
+					addSchoolFlag = true;
+				}
+				else
+				{
+					addSchoolFlag = false;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if(addSchoolConnection != null)
+		{
+			try {
+				addSchoolConnection.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}		
+		return addSchoolFlag;
+		
+	}
+	public boolean removeSchoolFromDatabase(String schoolName)
+	{
+		boolean removeSchoolFlag = false;
+		Connection removeSchoolConnection = null;
+		try 
+		{
+			removeSchoolConnection = DriverManager
+			.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "test!"); //root! at sru test! at home
+			//.getConnection("jdbc:mysql://localhost:3306/placeStudentsEducation","root", "root!"); //root! at sru test! at home
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			
+		}
+
+		if (removeSchoolConnection != null) 
+		{
+			
+			try {
+				
+				String sqlRemoveSchool = " DELETE FROM SCHOOLS WHERE schoolName =?";
+				
+				//prepared statements used to prevent sql injection
+				java.sql.PreparedStatement preparedRemoveSchoolStatement = removeSchoolConnection.prepareStatement(sqlRemoveSchool);
+				preparedRemoveSchoolStatement .setString(1,schoolName);
+				int testIfDeleted = preparedRemoveSchoolStatement.executeUpdate();
+				if(testIfDeleted== 1)
+				{
+					removeSchoolFlag = true;
+				}
+				else
+				{
+					removeSchoolFlag = false;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if(removeSchoolConnection != null)
+		{
+			try {
+				removeSchoolConnection.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}		
+		
+		
+		return removeSchoolFlag;
 	}
 }
 
