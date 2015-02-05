@@ -8,7 +8,9 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
 
+import Core.ProblemInfo;
 import OnMyOwnProjectGui.FirstProjectAddRemoveScreen;
+import OnMyOwnProjectGui.LoginGui;
 import OnMyOwnProjectGui.OnMyOwnProjectGui;
 
 public class OnMyOwnProjectMain {
@@ -18,12 +20,19 @@ public class OnMyOwnProjectMain {
 	{
 		//start gui here
 		
+		//LoginGui logIn = new LoginGui();
 		//checkIfDBExists();
 		//checkIfTableExists("Students");
 		//checkIfTableExists("Schools");
-		FirstProjectAddRemoveScreen GUI = new FirstProjectAddRemoveScreen();
-
-
+	
+		if(ProblemInfo.logInSuccessful) //TODO stubbed to always be true for now
+		{
+			FirstProjectAddRemoveScreen GUI = new FirstProjectAddRemoveScreen();
+		}
+		else
+		{
+			System.out.println("Could not log into the server");
+		}
 
 		
 

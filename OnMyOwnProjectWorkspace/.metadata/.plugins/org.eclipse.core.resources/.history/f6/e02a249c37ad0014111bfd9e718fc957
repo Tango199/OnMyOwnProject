@@ -1,0 +1,30 @@
+package OnMyOwnProjectGui;
+
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class loginGui
+{
+	public loginGui()
+	{
+		final JFrame theFrame = new JFrame();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int widthOfScreen = gd.getDisplayMode().getWidth();
+		int heightOfScreen = gd.getDisplayMode().getHeight();
+		theFrame.setTitle("Login to the database");
+		theFrame.setSize(widthOfScreen-50,heightOfScreen-50);
+		theFrame.setLocation(550, 400);
+		
+		final JPanel panel = new JPanel(new GridLayout(2,3));
+		final JLabel usernameLabel = new JLabel("Enter your username");
+		final JLabel passwordLabel = new JLabel("Enter your password");
+		final JTextField userNameField = new JTextField(50);
+		final JTextField passwordField = new JTextField(50);
+		
+		
+	}
+}

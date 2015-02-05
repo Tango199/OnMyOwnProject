@@ -8,7 +8,9 @@ public class ProblemInfo {
 	public static int numSchools;
 	public static int numStudents;
 	public static int totalNumPlacements;
-	
+	public static String username;
+	public static String password;
+	public static boolean logInSuccessful = true;
 	public static void print(Object printThis)
 	{
 		System.out.println(printThis);
