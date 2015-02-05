@@ -43,10 +43,10 @@ public class OnMyOwnProjectSchoolSelectionProgram
 		//writeInputOut();
 		if(possible)
 		{
-			assignStudents();
-			assignStuckKids();
-			printShortResults();
-			printLongResults();
+			//assignStudents();
+			//assignStuckKids();
+			//printShortResults();
+			//printLongResults();
 		}
 		else
 		{
@@ -59,7 +59,7 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	{
 		if(ProblemInfo.numStudents > ProblemInfo.totalNumPlacements)
 		{
-			System.out.println("Huston we have a problem");
+			System.out.println("we have a problem");
 			return false;
 		}
 		else
@@ -69,9 +69,13 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	public void assignStudents()
 	{
 		int randNum;
-		String firstChoice;
-		String secondChoice;
-		String thirdChoice;
+		String firstRegion;
+		String secondRegion;
+		String thirdRegion;
+
+		String fourthRegion;
+		String fifthRegion;
+		String sixthRegion;
 		boolean done = false;
 		
 		while (!done)
@@ -83,10 +87,12 @@ public class OnMyOwnProjectSchoolSelectionProgram
 			}
 			else
 			{
-				firstChoice = students.get(randNum).getStudentsFirstChoice();
-				secondChoice = students.get(randNum).getStudentsSecondChoice();
-				thirdChoice = students.get(randNum).getStudentsThirdChoice();
-				
+				firstRegion = students.get(randNum).getStudentsFirstRegion();
+				secondRegion = students.get(randNum).getStudentsSecondRegion();
+				thirdRegion = students.get(randNum).getStudentsThirdRegion();
+				fourthRegion = students.get(randNum).getStudentsFourthRegion();
+				fifthRegion = students.get(randNum).getStudentsFifthRegion();
+				sixthRegion = students.get(randNum).getStudentsSixthRegion();
 				for(int i=0; i < ProblemInfo.numSchools;i++)
 				{
 					if(firstChoice.equals(schools.get(i).getSchoolName()))

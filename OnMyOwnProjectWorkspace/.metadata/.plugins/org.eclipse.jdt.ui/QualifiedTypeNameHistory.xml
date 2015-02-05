@@ -42,4 +42,5 @@
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="OnMyOwnProjectGui.LoginGui"/>
 <fullyQualifiedTypeName name="Core.ProblemInfo"/>
+<fullyQualifiedTypeName name="javax.swing.BoxLayout"/>
 </qualifiedTypeNameHistroy>
