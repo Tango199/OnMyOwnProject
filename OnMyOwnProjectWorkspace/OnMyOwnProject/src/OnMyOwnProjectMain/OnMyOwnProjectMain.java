@@ -170,9 +170,15 @@ public class OnMyOwnProjectMain {
 						stmt = createTableConnection.createStatement();
 						String sqlCreateStudentTable = "CREATE TABLE STUDENTS "+
 												"(name VARCHAR(52) not NULL, "+
-												" firstChoice VARCHAR(255), "+
-												" secondChoice VARCHAR(255), "+
-												" thirdChoice VARCHAR(255), "+
+												" firstRegion VARCHAR(255), "+
+												" secondRegion VARCHAR(255), "+
+												" thirdRegion VARCHAR(255), "+
+												" fourthRegion VARCHAR(255),"+
+												" fifthRegion VARCHAR(255),"+
+												" sixthRegion VARCHAR(255),"+
+												" firstWildCard VARCHAR(255),"+
+												" secondWildCard VARCHAR(255),"+
+												" thirdWildCard VARCHAR(255),"+
 												" PRIMARY KEY ( name ))";
 						stmt.executeUpdate(sqlCreateStudentTable);
 						System.out.println("Created Students Table in database");
@@ -183,7 +189,8 @@ public class OnMyOwnProjectMain {
 						String sqlCreateSchoolTable = "CREATE TABLE SCHOOLS "+
 								" (schoolName VARCHAR(52) not NULL, "+
 								" numStudentsRecieving INTEGER not NULL, "+
-								" PRIMARY KEY ( schoolName ))";
+								" regionOfSchool VARCHAR(52) not NULL" +
+							    " PRIMARY KEY ( schoolName ))";
 						stmt.executeUpdate(sqlCreateSchoolTable);
 						System.out.println("Created Schools table in database");
 					}

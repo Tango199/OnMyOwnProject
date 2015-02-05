@@ -73,12 +73,25 @@ public class FirstProjectAddRemoveScreen
 		//add student stuff
 		final JLabel studentNameLabel = new JLabel("Student Name");
 		final JTextField studentNameField = new JTextField(25);
-		final JLabel studentFirstPlacementLabel = new JLabel("First Choice");
-		final JTextField firstPlacementField = new JTextField(50);
-		final JLabel studentSecondPlacementLabel = new JLabel("Second Choice");
-		final JTextField secondPlacementField = new JTextField(50);
-		final JLabel studentThirdPlacementLabel = new JLabel("Third Choice");
-		final JTextField thirdPlacementField = new JTextField(50);
+		final JLabel studentFirstRegionLabel = new JLabel("First Region");
+		final JTextField firstRegionField = new JTextField(50);
+		final JLabel studentSecondRegionLabel = new JLabel("Second Region");
+		final JTextField secondRegionField = new JTextField(50);
+		final JLabel studentThirdRegionLabel = new JLabel("Third Region");
+		final JTextField thirdRegionField = new JTextField(50);
+		//TODO add the new regions and wildcards to the gui... gonna have to change the layout
+		final JLabel studentFourthRegionLabel = new JLabel("Fourth Region");
+		final JTextField fourthRegionField = new JTextField(50);
+		final JLabel studentFifthRegionLabel = new JLabel("Fifth Region");
+		final JTextField fifthRegionField = new JTextField(50);
+		final JLabel studentSixthRegionLabel = new JLabel("Sixth Region");
+		final JTextField sixthRegionField = new JTextField(50);
+		final JLabel studentFirstWildCardLabel = new JLabel("First Wild Card");
+		final JTextField firstWildCardField = new JTextField(50);
+		final JLabel studentSecondWildCardLabel = new JLabel("Second Wild Card");
+		final JTextField secondWildCardField = new JTextField(50);
+		final JLabel studentThirdWildCardLabel = new JLabel("Third Wild Card");
+		final JTextField thirdWildCardField = new JTextField(50);
 		final JButton addStudent = new JButton("Add Student");
 		final JLabel space1 = new JLabel("");
 		
@@ -100,6 +113,8 @@ public class FirstProjectAddRemoveScreen
 		final JTextField schoolNameFieldToAdd = new JTextField(45);
 		final JLabel numberOfPlacementsLabel = new JLabel("Number of placements offered");
 		final JTextField numberOfPlacementsField = new JTextField(5);
+		final JLabel addSchoolRegionLabel = new JLabel("Region");
+		final JTextField addSchoolRegionTextField = new JTextField(45);
 		final JButton addSchool = new JButton("Add School");
 		
 		//remove school stuff
@@ -130,12 +145,12 @@ public class FirstProjectAddRemoveScreen
 				{
 					panel.remove(studentNameLabel);
 					panel.remove(studentNameField);
-					panel.remove(studentFirstPlacementLabel);
-					panel.remove(firstPlacementField);
-					panel.remove(studentSecondPlacementLabel);
-					panel.remove(secondPlacementField);
-					panel.remove(studentThirdPlacementLabel);
-					panel.remove(thirdPlacementField);
+					panel.remove(studentFirstRegionLabel);
+					panel.remove(firstRegionField);
+					panel.remove(studentSecondRegionLabel);
+					panel.remove(secondRegionField);
+					panel.remove(studentThirdRegionLabel);
+					panel.remove(thirdRegionField);
 					panel.remove(space1);
 					panel.remove(addStudent);
 					panel.remove(firstProgramButton);
@@ -167,6 +182,8 @@ public class FirstProjectAddRemoveScreen
 				panel.add(schoolNameFieldToAdd);
 				panel.add(numberOfPlacementsLabel);
 				panel.add(numberOfPlacementsField);
+				panel.add(addSchoolRegionLabel);
+				panel.add(addSchoolRegionTextField);
 				panel.add(addSchool);
 				addSchool.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e)
@@ -174,7 +191,9 @@ public class FirstProjectAddRemoveScreen
 						String schoolToAdd = schoolNameFieldToAdd.getText();
 						schoolToAdd = replaceSpace(schoolToAdd);
 						int numSchoolPlacements = Integer.parseInt(numberOfPlacementsField.getText());
-						boolean addSchoolFlag=addSchoolToDatabase(schoolToAdd,numSchoolPlacements);
+						String region = addSchoolRegionTextField.getText();
+						region = replaceSpace(region);
+						boolean addSchoolFlag=addSchoolToDatabase(schoolToAdd,numSchoolPlacements,region);
 						if(addSchoolFlag)
 						{
 							System.out.println("School added");
@@ -186,8 +205,7 @@ public class FirstProjectAddRemoveScreen
 						}
 					}
 				});
-				panel.add(space2);
-				panel.add(space3);
+			
 				panel.add(space4);
 				panel.add(space5);
 				panel.add(space6);
@@ -222,12 +240,12 @@ public class FirstProjectAddRemoveScreen
 				{
 					panel.remove(studentNameLabel);
 					panel.remove(studentNameField);
-					panel.remove(studentFirstPlacementLabel);
-					panel.remove(firstPlacementField);
-					panel.remove(studentSecondPlacementLabel);
-					panel.remove(secondPlacementField);
-					panel.remove(studentThirdPlacementLabel);
-					panel.remove(thirdPlacementField);
+					panel.remove(studentFirstRegionLabel);
+					panel.remove(firstRegionField);
+					panel.remove(studentSecondRegionLabel);
+					panel.remove(secondRegionField);
+					panel.remove(studentThirdRegionLabel);
+					panel.remove(thirdRegionField);
 					panel.remove(space1);
 					panel.remove(addStudent);
 					panel.remove(firstProgramButton);
@@ -241,9 +259,9 @@ public class FirstProjectAddRemoveScreen
 					panel.remove(schoolNameFieldToAdd);
 					panel.remove(numberOfPlacementsLabel);
 					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchoolRegionLabel);
+					panel.remove(addSchoolRegionTextField);
 					panel.remove(addSchool);
-					panel.remove(space2);
-					panel.remove(space3);
 					panel.remove(space4);
 					panel.remove(space5);
 					panel.remove(space6);
@@ -333,9 +351,9 @@ public class FirstProjectAddRemoveScreen
 					panel.remove(schoolNameFieldToAdd);
 					panel.remove(numberOfPlacementsLabel);
 					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchoolRegionLabel);
+					panel.remove(addSchoolRegionTextField);
 					panel.remove(addSchool);
-					panel.remove(space2);
-					panel.remove(space3);
 					panel.remove(space4);
 					panel.remove(space5);
 					panel.remove(space6);
@@ -347,12 +365,12 @@ public class FirstProjectAddRemoveScreen
 				}
 				panel.add(studentNameLabel);
 				panel.add(studentNameField);
-				panel.add(studentFirstPlacementLabel);
-				panel.add(firstPlacementField);
-				panel.add(studentSecondPlacementLabel);
-				panel.add(secondPlacementField);
-				panel.add(studentThirdPlacementLabel);
-				panel.add(thirdPlacementField);
+				panel.add(studentFirstRegionLabel);
+				panel.add(firstRegionField);
+				panel.add(studentSecondRegionLabel);
+				panel.add(secondRegionField);
+				panel.add(studentThirdRegionLabel);
+				panel.add(thirdRegionField);
 				panel.add(space1);
 				panel.add(addStudent);
 				
@@ -360,23 +378,41 @@ public class FirstProjectAddRemoveScreen
 					public void actionPerformed(ActionEvent e)
 					{
 						String studentName = studentNameField.getText();
-						String firstChoice = firstPlacementField.getText();
-						String secondChoice = secondPlacementField.getText();
-						String thirdChoice = thirdPlacementField.getText();
+						String firstRegion = firstRegionField.getText();
+						String secondRegion = secondRegionField.getText();
+						String thirdRegion = thirdRegionField.getText();
+						String fourthRegion = fourthRegionField.getText();
+						String fifthRegion = fifthRegionField.getText();
+						String sixthRegion = sixthRegionField.getText();
+						String firstWildCard= firstWildCardField.getText();
+						String secondWildCard = secondWildCardField.getText();
+						String thirdWildCard = thirdWildCardField.getText();
 						
 						studentName = replaceSpace(studentName);
-						firstChoice = replaceSpace(firstChoice);
-						secondChoice = replaceSpace(secondChoice);
-						thirdChoice = replaceSpace(thirdChoice);
+						firstRegion = replaceSpace(firstRegion);
+						secondRegion = replaceSpace(secondRegion);
+						thirdRegion = replaceSpace(thirdRegion);
+						fourthRegion = replaceSpace(fourthRegion);
+						fifthRegion = replaceSpace(fifthRegion);
+						sixthRegion = replaceSpace(sixthRegion);
+						firstWildCard = replaceSpace(firstWildCard);
+						secondWildCard = replaceSpace(secondWildCard);
+						thirdWildCard = replaceSpace(thirdWildCard);
 						
-						addStudentToFile(studentName,firstChoice,secondChoice,thirdChoice);
-						addStudentToDatabase(studentName,firstChoice,secondChoice,thirdChoice);
+						
+						//addStudentToFile(studentName,firstChoice,secondChoice,thirdChoice); TODO
+						addStudentToDatabase(studentName,firstRegion,secondRegion,thirdRegion,fourthRegion,fifthRegion,sixthRegion,firstWildCard,secondWildCard,thirdWildCard);
 						System.out.println("Added Student");
 						studentNameField.setText("");
-						firstPlacementField.setText("");
-						secondPlacementField.setText("");
-						thirdPlacementField.setText("");
-						
+						firstRegionField.setText("");
+						secondRegionField.setText("");
+						thirdRegionField.setText("");
+						fourthRegionField.setText("");
+						fifthRegionField.setText("");
+						sixthRegionField.setText("");
+						firstWildCardField.setText("");
+						secondWildCardField.setText("");
+						thirdWildCardField.setText("");
 					}
 				});
 				
@@ -395,12 +431,12 @@ public class FirstProjectAddRemoveScreen
 				{
 					panel.remove(studentNameLabel);
 					panel.remove(studentNameField);
-					panel.remove(studentFirstPlacementLabel);
-					panel.remove(firstPlacementField);
-					panel.remove(studentSecondPlacementLabel);
-					panel.remove(secondPlacementField);
-					panel.remove(studentThirdPlacementLabel);
-					panel.remove(thirdPlacementField);
+					panel.remove(studentFirstRegionLabel);
+					panel.remove(firstRegionField);
+					panel.remove(studentSecondRegionLabel);
+					panel.remove(secondRegionField);
+					panel.remove(studentThirdRegionLabel);
+					panel.remove(thirdRegionField);
 					panel.remove(space1);
 					panel.remove(addStudent);
 					panel.remove(firstProgramButton);
@@ -415,9 +451,9 @@ public class FirstProjectAddRemoveScreen
 					panel.remove(schoolNameFieldToAdd);
 					panel.remove(numberOfPlacementsLabel);
 					panel.remove(numberOfPlacementsField);
+					panel.remove(addSchoolRegionLabel);
+					panel.remove(addSchoolRegionTextField);
 					panel.remove(addSchool);
-					panel.remove(space2);
-					panel.remove(space3);
 					panel.remove(space4);
 					panel.remove(space5);
 					panel.remove(space6);
@@ -691,7 +727,8 @@ public class FirstProjectAddRemoveScreen
 		String replacedString = stringToReplace.replace(" ", "_");
 		return replacedString;
 	}
-	public void addStudentToDatabase(String name, String firstChoice, String secondChoice,String thirdChoice)
+	public void addStudentToDatabase(String name, String firstRegion, String secondRegion,String thirdRegion,String fourthRegion, String fifthRegion,
+			String sixthRegion, String firstWildCard, String secondWildCard, String thirdWildCard)
 	{
 		//TODO return if it is successful or not
 		Connection addStudentConnection = null;
@@ -714,15 +751,21 @@ public class FirstProjectAddRemoveScreen
 			
 			try {
 				
-				String sqlAdd = " INSERT INTO STUDENTS(name,firstChoice,secondChoice,thirdChoice)"
-						+ "VALUES(?,?,?,?)";
+				String sqlAdd = " INSERT INTO STUDENTS(name,firstRegion,secondRegion,thirdRegion,fourthRegion,fifthRegion,sixthRegion,firstWildCard,secondWildCard,thirdWildCard)"
+						+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
 				
 				//prepared statements used to prevent sql injection
 				java.sql.PreparedStatement preparedAddStatement = addStudentConnection.prepareStatement(sqlAdd);
 				preparedAddStatement.setString(1,name);
-				preparedAddStatement.setString(2, firstChoice);
-				preparedAddStatement.setString(3,secondChoice);
-				preparedAddStatement.setString(4,thirdChoice);
+				preparedAddStatement.setString(2, firstRegion);
+				preparedAddStatement.setString(3,secondRegion);
+				preparedAddStatement.setString(4,thirdRegion);
+				preparedAddStatement.setString(5, fourthRegion);
+				preparedAddStatement.setString(6,fifthRegion);
+				preparedAddStatement.setString(7,sixthRegion);
+				preparedAddStatement.setString(8, firstWildCard);
+				preparedAddStatement.setString(9,secondWildCard);
+				preparedAddStatement.setString(10,thirdWildCard);
 				preparedAddStatement.execute();
 				System.out.println("Added "+name+" to the student table");
 			} catch (SQLException e) {
@@ -742,7 +785,7 @@ public class FirstProjectAddRemoveScreen
 			}
 		}		
 	}
-	public boolean addSchoolToDatabase(String schoolName, int numStudents)
+	public boolean addSchoolToDatabase(String schoolName, int numStudents,String region)
 	{
 		Connection addSchoolConnection = null;
 		boolean addSchoolFlag = false;
@@ -764,13 +807,14 @@ public class FirstProjectAddRemoveScreen
 			
 			try {
 				
-				String sqlAddSchool = " INSERT INTO SCHOOLS(schoolName,numStudentsRecieving)"
-						+ "VALUES(?,?)";
+				String sqlAddSchool = " INSERT INTO SCHOOLS(schoolName,numStudentsRecieving,regionOfSchool)"
+						+ "VALUES(?,?,?)";
 				
 				//prepared statements used to prevent sql injection
 				java.sql.PreparedStatement preparedAddSchoolStatement = addSchoolConnection.prepareStatement(sqlAddSchool);
-				preparedAddSchoolStatement .setString(1,schoolName);
-				preparedAddSchoolStatement .setInt(2, numStudents);
+				preparedAddSchoolStatement.setString(1,schoolName);
+				preparedAddSchoolStatement.setInt(2, numStudents);
+				preparedAddSchoolStatement.setString(3, region);
 				int testIfAdded = preparedAddSchoolStatement.executeUpdate();
 				if(testIfAdded== 1)
 				{

@@ -3,23 +3,44 @@ package OnMyOwnProjectSchoolSelectionProgram;
 public class Student {
 
 	private String nameOfStudent;
-	private String firstChoice;
-	private String secondChoice;
-	private String thirdChoice;
+	private String firstRegion;
+	private String secondRegion;
+	private String thirdRegion;
+	private String fourthRegion;
+	private String fifthRegion;
+	private String sixthRegion;
+	private String firstWildCard;
+	private String secondWildCard;
+	private String thirdWildCard;
+	
 	private boolean isAssigned;
 	private String assignedSchool;
 	public Student()
 	{
 		
 	}
-	public Student(String nameOfStudent, String firstChoice, String secondChoice, String thirdChoice)
+	/*public Student(String nameOfStudent, String firstChoice, String secondChoice, String thirdChoice)
 	{
 		this.nameOfStudent = nameOfStudent;
-		this.firstChoice = firstChoice;
-		this.secondChoice = secondChoice;
-		this.thirdChoice = thirdChoice;
+		this.firstRegion = firstChoice;
+		this.secondRegion = secondChoice;
+		this.thirdRegion = thirdChoice;
 		isAssigned = false;
 		assignedSchool=null;
+	}*/
+	public Student (String nameOfStudent, String firstRegion, String secondRegion, String thirdRegion, String fourthRegion, String fifthRegion, String sixthRegion, 
+			String firstWildCard, String secondWildCard,String thirdWildCard)
+	{
+		this.nameOfStudent = nameOfStudent;
+		this.firstRegion = firstRegion;
+		this.secondRegion = secondRegion;
+		this.thirdRegion = thirdRegion;
+		this.fourthRegion = fourthRegion;
+		this.fifthRegion = fifthRegion;
+		this.sixthRegion = sixthRegion;
+		this.firstWildCard = firstWildCard;
+		this.secondWildCard = secondWildCard;
+		this.thirdWildCard = thirdWildCard;
 	}
 	public String getAssignedSchool()
 	{
@@ -45,29 +66,78 @@ public class Student {
 	{
 		nameOfStudent = name;
 	}
-	public String getStudentsFirstChoice()
+	public String getStudentsFirstRegion()
 	{
-		return firstChoice;
+		return firstRegion;
 	}
-	public void setStudentsFirstChoice(String choice)
+	public void setStudentsRegion(String choice)
 	{
-		firstChoice = choice;
+		firstRegion = choice;
 	}
-	public String getStudentsSecondChoice()
+	public String getStudentsSecondRegion()
 	{
-		return secondChoice;
+		return secondRegion;
 	}
-	public void setStudentsSecondChoice(String choice)
+	public void setStudentsSecondRegion(String choice)
 	{
-		secondChoice = choice;
+		secondRegion = choice;
 	}
-	public String getStudentsThirdChoice()
+	public String getStudentsThirdRegion()
 	{
-		return thirdChoice;
+		return thirdRegion;
 	}
-	public void setStudentsThirdChoice(String choice)
+	public void setStudentsThirdRegion(String choice)
 	{
-		thirdChoice = choice;
+		thirdRegion = choice;
+	}
+	
+	public String getStudentsFourthRegion()
+	{
+		return fourthRegion;
+	}
+	public void setStudentsFourthRegion(String choice)
+	{
+		fourthRegion = choice;
+	}
+	public String getStudentsFifthRegion()
+	{
+		return fifthRegion;
+	}
+	public void setStudentsFifthRegion(String choice)
+	{
+		fifthRegion = choice;
+	}
+	public String getStudentsSixthRegion()
+	{
+		return sixthRegion;
+	}
+	public void setStudentsSixthRegion(String choice)
+	{
+		sixthRegion = choice;
+	}
+	public String getStudentsFirstWildCard()
+	{
+		return firstWildCard;
+	}
+	public void setStudentsFirstWildCard(String choice)
+	{
+		firstWildCard = choice;
+	}
+	public String getStudentsSecondWildCard()
+	{
+		return secondWildCard;
+	}
+	public void setStudentsSecondWildCard(String choice)
+	{
+		secondWildCard = choice;
+	}
+	public String getStudentsThirdWildCard()
+	{
+		return thirdWildCard;
+	}
+	public void setStudentsThirdWildCard(String choice)
+	{
+		thirdWildCard = choice;
 	}
 	
 }

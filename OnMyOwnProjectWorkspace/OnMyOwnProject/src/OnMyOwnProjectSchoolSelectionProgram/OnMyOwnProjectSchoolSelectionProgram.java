@@ -229,10 +229,17 @@ public class OnMyOwnProjectSchoolSelectionProgram
 				while(studentsSet.next())
 				{
 					String nameOfStudent = studentsSet.getString("name");
-					String firstChoice = studentsSet.getString("firstChoice");
-					String secondChoice = studentsSet.getString("secondChoice");
-					String thirdChoice = studentsSet.getString("thridChoice");
-					students.add(new Student(nameOfStudent,firstChoice,secondChoice,thirdChoice));
+					String firstRegion = studentsSet.getString("firstRegion");
+					String secondRegion = studentsSet.getString("secondRegion");
+					String thirdRegion = studentsSet.getString("thridRegion");
+					String fourthRegion = studentsSet.getString("fourthRegion");
+					String fifthRegion = studentsSet.getString("fifthRegion");
+					String sixthRegion = studentsSet.getString("sixthRegion");
+					
+					String firstWildCard = studentsSet.getString("firstWildCard");
+					String secondWildCard = studentsSet.getString("secondWildCard");
+					String thirdWildCard = studentsSet.getString("thirdWildCard");
+					students.add(new Student(nameOfStudent,firstRegion,secondRegion,thirdRegion,fourthRegion,fifthRegion,sixthRegion,firstWildCard,secondWildCard,thirdWildCard));
 				}
 				studentsSet.close();
 				numStudentsSet.close();
@@ -293,8 +300,9 @@ public class OnMyOwnProjectSchoolSelectionProgram
 				{
 					String nameOfSchool = schoolsSet.getString("schoolName");
 					int numStudentsAccepting= schoolsSet.getInt("numStudentsRecieving");
+					String regionOfSchool = schoolsSet.getString("regionOfSchool");
 					numOverallPlacements += numStudentsAccepting;
-					schools.add(new School(nameOfSchool,numStudentsAccepting));
+					schools.add(new School(nameOfSchool,numStudentsAccepting,regionOfSchool));
 				}
 				ProblemInfo.totalNumPlacements=numOverallPlacements;
 				schoolsSet.close();
@@ -322,43 +330,43 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	}
 	public void readInStudentsExcel() throws IOException
 	{
-		try
-		{
-			FileInputStream fileStudent = new FileInputStream(new File(ProblemInfo.inputPath + "Students.xls"));
-			HSSFWorkbook studentWorkbook = new HSSFWorkbook(fileStudent);
-			HSSFSheet studentSheet = studentWorkbook.getSheetAt(0);
-			ProblemInfo.numStudents = studentSheet.getPhysicalNumberOfRows() -1;
-			Cell cell = null;
-			int rowCounter = 1;
-			int colCounter = 0;
-			String nameOfStudent;
-			String firstChoice;
-			String secondChoice;
-			String thirdChoice;
-			
-			for(int i=ProblemInfo.numStudents; i >0; i--)
-			{
-				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
-				nameOfStudent = cell.toString();
-				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
-				firstChoice = cell.toString();
-				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
-				secondChoice = cell.toString();
-				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
-				thirdChoice = cell.toString();
-				
-				students.add(new Student(nameOfStudent,firstChoice,secondChoice,thirdChoice));
-				rowCounter++;
-				colCounter=0;
-				
-			}
-			
-			fileStudent.close();
-		}
-		catch(FileNotFoundException e){
-			e.printStackTrace();
-		}
-		
+//		try
+//		{
+//			FileInputStream fileStudent = new FileInputStream(new File(ProblemInfo.inputPath + "Students.xls"));
+//			HSSFWorkbook studentWorkbook = new HSSFWorkbook(fileStudent);
+//			HSSFSheet studentSheet = studentWorkbook.getSheetAt(0);
+//			ProblemInfo.numStudents = studentSheet.getPhysicalNumberOfRows() -1;
+//			Cell cell = null;
+//			int rowCounter = 1;
+//			int colCounter = 0;
+//			String nameOfStudent;
+//			String firstChoice;
+//			String secondChoice;
+//			String thirdChoice;
+//			
+//			for(int i=ProblemInfo.numStudents; i >0; i--)
+//			{
+//				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
+//				nameOfStudent = cell.toString();
+//				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
+//				firstChoice = cell.toString();
+//				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
+//				secondChoice = cell.toString();
+//				cell = studentSheet.getRow(rowCounter).getCell(colCounter++);
+//				thirdChoice = cell.toString();
+//				
+//				students.add(new Student(nameOfStudent,firstChoice,secondChoice,thirdChoice));
+//				rowCounter++;
+//				colCounter=0;
+//				
+//			}
+//			
+//			fileStudent.close();
+//		}
+//		catch(FileNotFoundException e){
+//			e.printStackTrace();
+//		}
+//		
 	}
 	public void readInSchoolsExcel() throws IOException
 	{
@@ -400,77 +408,77 @@ public class OnMyOwnProjectSchoolSelectionProgram
 	}
 	public void writeInputOut()
 	{
-		HSSFWorkbook printOutWorkBook = new HSSFWorkbook();
-		HSSFSheet printSheet = printOutWorkBook.createSheet("Read In Data");
-		int rowNum =0;
-		Row row = printSheet.createRow(rowNum);
-		Cell cell = row.createCell(0);
-		cell.setCellValue("SCHOOLS");
-		row = printSheet.createRow(++rowNum);
-		cell = row.createCell(0);
-		cell.setCellValue("Name of School");
-		cell=row.createCell(1);
-		cell.setCellValue("Number of students allowed");
-		
-		
-		for(int i=0;i<ProblemInfo.numSchools;i++)
-		{
-			row= printSheet.createRow(++rowNum);
-			cell=row.createCell(0);
-			cell.setCellValue(schools.get(i).getSchoolName());
-			cell=row.createCell(1);
-			cell.setCellValue(schools.get(i).getNumStudentsPerSchool());
-			
-		}
-		
-		row = printSheet.createRow(++rowNum);
-		row = printSheet.createRow(++rowNum);
-		
-		cell = row.createCell(0);
-		cell.setCellValue("STUDENTS");
-		row = printSheet.createRow(++rowNum);
-		cell=row.createCell(0);
-		cell.setCellValue("Student Name");
-		cell=row.createCell(1);
-		cell.setCellValue("Student First Choice");
-		cell=row.createCell(2);
-		cell.setCellValue("Student Second Choice");
-		cell=row.createCell(3);
-		cell.setCellValue("Student Third Choice");
-		
-		for(int i=0;i<ProblemInfo.numStudents;i++)
-		{
-			row = printSheet.createRow(++rowNum);
-			cell=row.createCell(0);
-			cell.setCellValue(students.get(i).getStudentsName());
-			cell = row.createCell(1);
-			cell.setCellValue(students.get(i).getStudentsFirstChoice());
-			cell = row.createCell(2);
-			cell.setCellValue(students.get(i).getStudentsSecondChoice());
-			cell = row.createCell(3);
-			cell.setCellValue(students.get(i).getStudentsThirdChoice());
-		}
-		
-		for(int i=0; i < 6; i++)
-		{
-			printSheet.autoSizeColumn(i);
-		}
-		
-		try {
-			FileOutputStream inputFileOut =
-					new FileOutputStream(new File(ProblemInfo.
-							outputPath + "inputInfoCheck.xls"));
-			printOutWorkBook.write(inputFileOut);
-			inputFileOut.close();
-			ProblemInfo.print("Done Printing out inputInfoCheck.xls");
-
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+//		HSSFWorkbook printOutWorkBook = new HSSFWorkbook();
+//		HSSFSheet printSheet = printOutWorkBook.createSheet("Read In Data");
+//		int rowNum =0;
+//		Row row = printSheet.createRow(rowNum);
+//		Cell cell = row.createCell(0);
+//		cell.setCellValue("SCHOOLS");
+//		row = printSheet.createRow(++rowNum);
+//		cell = row.createCell(0);
+//		cell.setCellValue("Name of School");
+//		cell=row.createCell(1);
+//		cell.setCellValue("Number of students allowed");
+//		
+//		
+//		for(int i=0;i<ProblemInfo.numSchools;i++)
+//		{
+//			row= printSheet.createRow(++rowNum);
+//			cell=row.createCell(0);
+//			cell.setCellValue(schools.get(i).getSchoolName());
+//			cell=row.createCell(1);
+//			cell.setCellValue(schools.get(i).getNumStudentsPerSchool());
+//			
+//		}
+//		
+//		row = printSheet.createRow(++rowNum);
+//		row = printSheet.createRow(++rowNum);
+//		
+//		cell = row.createCell(0);
+//		cell.setCellValue("STUDENTS");
+//		row = printSheet.createRow(++rowNum);
+//		cell=row.createCell(0);
+//		cell.setCellValue("Student Name");
+//		cell=row.createCell(1);
+//		cell.setCellValue("Student First Choice");
+//		cell=row.createCell(2);
+//		cell.setCellValue("Student Second Choice");
+//		cell=row.createCell(3);
+//		cell.setCellValue("Student Third Choice");
+//		
+//		for(int i=0;i<ProblemInfo.numStudents;i++)
+//		{
+//			row = printSheet.createRow(++rowNum);
+//			cell=row.createCell(0);
+//			cell.setCellValue(students.get(i).getStudentsName());
+//			cell = row.createCell(1);
+//			cell.setCellValue(students.get(i).getStudentsFirstChoice());
+//			cell = row.createCell(2);
+//			cell.setCellValue(students.get(i).getStudentsSecondChoice());
+//			cell = row.createCell(3);
+//			cell.setCellValue(students.get(i).getStudentsThirdChoice());
+//		}
+//		
+//		for(int i=0; i < 6; i++)
+//		{
+//			printSheet.autoSizeColumn(i);
+//		}
+//		
+//		try {
+//			FileOutputStream inputFileOut =
+//					new FileOutputStream(new File(ProblemInfo.
+//							outputPath + "inputInfoCheck.xls"));
+//			printOutWorkBook.write(inputFileOut);
+//			inputFileOut.close();
+//			ProblemInfo.print("Done Printing out inputInfoCheck.xls");
+//
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
 		
 	}
 	public int getRandomNumber(int max, int min)

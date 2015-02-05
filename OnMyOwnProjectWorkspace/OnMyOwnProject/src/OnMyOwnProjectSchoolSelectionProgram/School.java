@@ -5,6 +5,7 @@ public class School {
 	private String schoolName;
 	private int numStudentsPerSchool;
 	private int numStudentsAssigned;
+	private String region;
 	
 	public School()
 	{
@@ -16,7 +17,21 @@ public class School {
 		this.numStudentsPerSchool = numStudentsPerSchool;
 		numStudentsAssigned =0;
 	}
+	public School(String schoolName, int numStudentsPerSchool,String region)
+	{
+		this.schoolName = schoolName;
+		this.numStudentsPerSchool = numStudentsPerSchool;
+		this.region = region;
+	}
 	
+	public String getRegion()
+	{
+		return region;
+	}
+	public void setRegion(String region)
+	{
+		this.region = region;
+	}
 	public int getNumStudentsAssigned()
 	{
 		return numStudentsAssigned;
