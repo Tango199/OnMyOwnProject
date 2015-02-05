@@ -38,6 +38,7 @@ public class OnMyOwnProjectMain {
 		try 
 		{
 			createDBconnection = DriverManager
+					//.getConnection("jdbc:mysql://205.149.70.68:3306/","rxs5346","root"); 
 					.getConnection("jdbc:mysql://localhost:3306/","root", "test!"); //root! at sru test! at home
 			//.getConnection("jdbc:mysql://localhost:3306/","root", "root!"); //root! at sru test! at home
 		} 
